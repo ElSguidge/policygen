@@ -7,6 +7,7 @@ import { CookieForm } from '@/components/cookie-form';
 import { EulaForm } from '@/components/eula-form';
 import { RefundForm } from '@/components/refund-form';
 import { DisclaimerForm } from '@/components/disclaimer-form';
+import { SwmsForm } from '@/components/swms-form';
 import { PolicyOutput } from '@/components/policy-output';
 import { PolicyFormData } from '@/lib/types';
 import { generatePrivacyPolicy } from '@/lib/generate-policy';
@@ -15,47 +16,9 @@ import { CookiePolicyData, generateCookiePolicy } from '@/lib/generators/cookie-
 import { EulaData, generateEula } from '@/lib/generators/eula';
 import { RefundPolicyData, generateRefundPolicy } from '@/lib/generators/refund-policy';
 import { DisclaimerData, generateDisclaimer } from '@/lib/generators/disclaimer';
+import { SwmsData, generateSwms } from '@/lib/generators/swms';
 
-type DocumentType = 'privacy' | 'terms' | 'cookie' | 'eula' | 'refund' | 'disclaimer' | null;
-
-const documentTypes = [
-  {
-    id: 'privacy' as const,
-    title: 'Privacy Policy',
-    description: 'GDPR, CCPA & CalOPPA compliant privacy policies for websites and applications.',
-    icon: ShieldIcon,
-  },
-  {
-    id: 'terms' as const,
-    title: 'Terms of Service',
-    description: 'Comprehensive terms and conditions to protect your business and users.',
-    icon: DocumentIcon,
-  },
-  {
-    id: 'cookie' as const,
-    title: 'Cookie Policy',
-    description: 'Cookie consent policies compliant with GDPR, PECR and ePrivacy regulations.',
-    icon: CookieIcon,
-  },
-  {
-    id: 'eula' as const,
-    title: 'EULA',
-    description: 'End-user license agreements for software, apps and digital products.',
-    icon: CodeIcon,
-  },
-  {
-    id: 'refund' as const,
-    title: 'Refund Policy',
-    description: 'Clear return and refund policies for e-commerce and subscription services.',
-    icon: RefundIcon,
-  },
-  {
-    id: 'disclaimer' as const,
-    title: 'Disclaimer',
-    description: 'Liability disclaimers for content, advice and professional services.',
-    icon: AlertIcon,
-  },
-];
+type DocumentType = 'privacy' | 'terms' | 'cookie' | 'eula' | 'refund' | 'disclaimer' | 'swms' | null;
 
 export default function Home() {
   const [selectedType, setSelectedType] = useState<DocumentType>(null);
@@ -97,6 +60,12 @@ export default function Home() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const handleGenerateSwms = (data: SwmsData) => {
+    const swms = generateSwms(data);
+    setGeneratedPolicy(swms);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const handleReset = () => {
     setGeneratedPolicy(null);
   };
@@ -114,6 +83,7 @@ export default function Home() {
       case 'eula': return 'End-User License Agreement';
       case 'refund': return 'Refund Policy';
       case 'disclaimer': return 'Disclaimer';
+      case 'swms': return 'Safe Work Method Statement';
       default: return '';
     }
   };
@@ -126,6 +96,7 @@ export default function Home() {
       case 'eula': return 'Generate a robust end-user license agreement for your software or digital product.';
       case 'refund': return 'Create a clear, comprehensive refund and return policy for your products or services.';
       case 'disclaimer': return 'Generate appropriate disclaimers to protect your business from liability.';
+      case 'swms': return 'Create a Safe Work Method Statement (SWMS) for high-risk construction work compliant with Australian WHS regulations.';
       default: return '';
     }
   };
@@ -149,6 +120,7 @@ export default function Home() {
             <nav className="hidden md:flex items-center gap-8 text-sm text-gray-600">
               <a href="#documents" className="hover:text-gray-900 transition-colors">Documents</a>
               <a href="#features" className="hover:text-gray-900 transition-colors">Features</a>
+              <a href="/blog" className="hover:text-gray-900 transition-colors">Blog</a>
               <a href="#faq" className="hover:text-gray-900 transition-colors">FAQ</a>
             </nav>
           </div>
@@ -159,7 +131,7 @@ export default function Home() {
           <div className="max-w-4xl mx-auto px-6 text-center">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-gray-50 rounded-full text-sm text-gray-600 mb-8">
               <CheckCircleIcon className="w-4 h-4 text-green-600" />
-              <span>Trusted by 10,000+ businesses worldwide</span>
+              <span>Free &middot; No signup required &middot; Instant download</span>
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-gray-900 mb-6 leading-[1.1]">
               Professional Legal Documents<br className="hidden md:block" /> for Your Business
@@ -190,11 +162,103 @@ export default function Home() {
           <div className="max-w-7xl mx-auto px-6">
             <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
               <span className="text-sm text-gray-500 font-medium">Compliant with:</span>
-              {['GDPR', 'CCPA', 'CalOPPA', 'COPPA', 'VCDPA', 'PECR', 'HIPAA'].map((badge) => (
+              {['GDPR', 'CCPA', 'CalOPPA', 'COPPA', 'VCDPA', 'PECR', 'HIPAA', 'Australian WHS'].map((badge) => (
                 <span key={badge} className="text-sm font-medium text-gray-700">
                   {badge}
                 </span>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* SWMS Highlight Section */}
+        <section className="py-16 md:py-20 bg-amber-50 border-b border-amber-100">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              <div>
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-amber-100 rounded-full text-sm font-medium text-amber-800 mb-6">
+                  <HardHatIcon className="w-4 h-4" />
+                  <span>Australian Construction</span>
+                </div>
+                <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-gray-900 mb-4">
+                  Safe Work Method Statements (SWMS)
+                </h2>
+                <p className="text-lg text-gray-600 mb-6 leading-relaxed">
+                  Generate compliant SWMS documents for high-risk construction work in Australia.
+                  Our generator covers all 19 categories of high-risk construction work as defined
+                  by the WHS Regulations.
+                </p>
+                <ul className="space-y-3 mb-8">
+                  <li className="flex items-start gap-3">
+                    <CheckCircleIcon className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                    <span className="text-gray-700">Compliant with Australian WHS legislation</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircleIcon className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                    <span className="text-gray-700">Covers all high-risk construction work categories</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircleIcon className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                    <span className="text-gray-700">Detailed hazard identification and risk controls</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircleIcon className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                    <span className="text-gray-700">Ready-to-use PPE requirements and emergency procedures</span>
+                  </li>
+                </ul>
+                <button
+                  onClick={() => setSelectedType('swms')}
+                  className="inline-flex items-center justify-center px-6 py-3 bg-amber-600 text-white font-medium rounded-lg hover:bg-amber-700 transition-colors"
+                >
+                  Generate SWMS Now
+                  <ArrowRightIcon className="w-4 h-4 ml-2" />
+                </button>
+              </div>
+              <div className="bg-white p-8 rounded-2xl border border-amber-200 shadow-sm">
+                <h3 className="font-semibold text-gray-900 mb-4">High-Risk Work Categories Covered:</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-gray-600">
+                  <div className="flex items-center gap-2">
+                    <div className="w-1.5 h-1.5 bg-amber-500 rounded-full"></div>
+                    <span>Work at heights</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-1.5 h-1.5 bg-amber-500 rounded-full"></div>
+                    <span>Demolition work</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-1.5 h-1.5 bg-amber-500 rounded-full"></div>
+                    <span>Excavation work</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-1.5 h-1.5 bg-amber-500 rounded-full"></div>
+                    <span>Structural alterations</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-1.5 h-1.5 bg-amber-500 rounded-full"></div>
+                    <span>Confined spaces</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-1.5 h-1.5 bg-amber-500 rounded-full"></div>
+                    <span>Asbestos removal</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-1.5 h-1.5 bg-amber-500 rounded-full"></div>
+                    <span>Electrical work</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-1.5 h-1.5 bg-amber-500 rounded-full"></div>
+                    <span>Scaffolding</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-1.5 h-1.5 bg-amber-500 rounded-full"></div>
+                    <span>Crane operations</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-1.5 h-1.5 bg-amber-500 rounded-full"></div>
+                    <span>Hot work</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -204,34 +268,167 @@ export default function Home() {
           <div className="max-w-7xl mx-auto px-6">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-gray-900 mb-4">
-                Choose Your Document
+                Professional Document Generator
               </h2>
               <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                Select the type of legal document you need. Our guided wizard will help you create a customized, professionally formatted document.
+                Generate customized, professionally formatted documents for your business. Each document is tailored to your specific requirements.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {documentTypes.map((doc) => {
-                const Icon = doc.icon;
-                return (
-                  <button
-                    key={doc.id}
-                    onClick={() => setSelectedType(doc.id)}
-                    className="group text-left p-8 bg-white border border-gray-200 rounded-2xl hover:border-gray-300 hover:shadow-lg transition-all duration-200"
-                  >
-                    <div className="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center mb-5 group-hover:bg-gray-900 transition-colors">
-                      <Icon className="w-6 h-6 text-gray-600 group-hover:text-white transition-colors" />
+            {/* Privacy & Data Compliance */}
+            <div className="mb-16">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                  <ShieldIcon className="w-5 h-5 text-blue-600" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold text-gray-900">Privacy & Data Compliance</h3>
+                  <p className="text-sm text-gray-600">Essential documents for data protection and regulatory compliance</p>
+                </div>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <button
+                  onClick={() => setSelectedType('privacy')}
+                  className="group text-left p-8 bg-white border border-gray-200 rounded-2xl hover:border-blue-300 hover:shadow-lg transition-all duration-200"
+                >
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center group-hover:bg-blue-600 transition-colors">
+                      <ShieldIcon className="w-6 h-6 text-blue-600 group-hover:text-white transition-colors" />
                     </div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-2">{doc.title}</h3>
-                    <p className="text-sm text-gray-600 leading-relaxed">{doc.description}</p>
-                    <div className="mt-5 flex items-center text-sm font-medium text-gray-900">
-                      <span>Generate now</span>
-                      <ArrowRightIcon className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                    <span className="text-xs font-medium text-blue-600 bg-blue-50 px-2 py-1 rounded-full">Most Popular</span>
+                  </div>
+                  <h4 className="text-lg font-semibold text-gray-900 mb-2">Privacy Policy</h4>
+                  <p className="text-sm text-gray-600 leading-relaxed mb-4">Comprehensive privacy policies compliant with GDPR, CCPA, CalOPPA, and other major data protection regulations worldwide.</p>
+                  <div className="flex items-center text-sm font-medium text-blue-600">
+                    <span>Generate Privacy Policy</span>
+                    <ArrowRightIcon className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </button>
+                <button
+                  onClick={() => setSelectedType('cookie')}
+                  className="group text-left p-8 bg-white border border-gray-200 rounded-2xl hover:border-blue-300 hover:shadow-lg transition-all duration-200"
+                >
+                  <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-blue-600 transition-colors">
+                    <CookieIcon className="w-6 h-6 text-blue-600 group-hover:text-white transition-colors" />
+                  </div>
+                  <h4 className="text-lg font-semibold text-gray-900 mb-2">Cookie Policy</h4>
+                  <p className="text-sm text-gray-600 leading-relaxed mb-4">Cookie consent policies compliant with GDPR, PECR and ePrivacy regulations. Essential for any website using tracking technologies.</p>
+                  <div className="flex items-center text-sm font-medium text-blue-600">
+                    <span>Generate Cookie Policy</span>
+                    <ArrowRightIcon className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </button>
+              </div>
+            </div>
+
+            {/* Business Protection */}
+            <div className="mb-16">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-10 h-10 bg-emerald-100 rounded-lg flex items-center justify-center">
+                  <ScaleIcon className="w-5 h-5 text-emerald-600" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold text-gray-900">Business Protection</h3>
+                  <p className="text-sm text-gray-600">Legal documents to protect your business interests and limit liability</p>
+                </div>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <button
+                  onClick={() => setSelectedType('terms')}
+                  className="group text-left p-6 bg-white border border-gray-200 rounded-2xl hover:border-emerald-300 hover:shadow-lg transition-all duration-200"
+                >
+                  <div className="w-11 h-11 bg-emerald-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-emerald-600 transition-colors">
+                    <DocumentIcon className="w-5 h-5 text-emerald-600 group-hover:text-white transition-colors" />
+                  </div>
+                  <h4 className="text-base font-semibold text-gray-900 mb-2">Terms of Service</h4>
+                  <p className="text-sm text-gray-600 leading-relaxed mb-4">Define user rights, responsibilities, and acceptable use policies.</p>
+                  <div className="flex items-center text-sm font-medium text-emerald-600">
+                    <span>Generate</span>
+                    <ArrowRightIcon className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </button>
+                <button
+                  onClick={() => setSelectedType('eula')}
+                  className="group text-left p-6 bg-white border border-gray-200 rounded-2xl hover:border-emerald-300 hover:shadow-lg transition-all duration-200"
+                >
+                  <div className="w-11 h-11 bg-emerald-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-emerald-600 transition-colors">
+                    <CodeIcon className="w-5 h-5 text-emerald-600 group-hover:text-white transition-colors" />
+                  </div>
+                  <h4 className="text-base font-semibold text-gray-900 mb-2">EULA</h4>
+                  <p className="text-sm text-gray-600 leading-relaxed mb-4">License agreements for software, apps and digital products.</p>
+                  <div className="flex items-center text-sm font-medium text-emerald-600">
+                    <span>Generate</span>
+                    <ArrowRightIcon className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </button>
+                <button
+                  onClick={() => setSelectedType('disclaimer')}
+                  className="group text-left p-6 bg-white border border-gray-200 rounded-2xl hover:border-emerald-300 hover:shadow-lg transition-all duration-200"
+                >
+                  <div className="w-11 h-11 bg-emerald-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-emerald-600 transition-colors">
+                    <AlertIcon className="w-5 h-5 text-emerald-600 group-hover:text-white transition-colors" />
+                  </div>
+                  <h4 className="text-base font-semibold text-gray-900 mb-2">Disclaimer</h4>
+                  <p className="text-sm text-gray-600 leading-relaxed mb-4">Liability disclaimers for content, advice and services.</p>
+                  <div className="flex items-center text-sm font-medium text-emerald-600">
+                    <span>Generate</span>
+                    <ArrowRightIcon className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </button>
+                <button
+                  onClick={() => setSelectedType('refund')}
+                  className="group text-left p-6 bg-white border border-gray-200 rounded-2xl hover:border-emerald-300 hover:shadow-lg transition-all duration-200"
+                >
+                  <div className="w-11 h-11 bg-emerald-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-emerald-600 transition-colors">
+                    <RefundIcon className="w-5 h-5 text-emerald-600 group-hover:text-white transition-colors" />
+                  </div>
+                  <h4 className="text-base font-semibold text-gray-900 mb-2">Refund Policy</h4>
+                  <p className="text-sm text-gray-600 leading-relaxed mb-4">Clear return and refund terms for products and services.</p>
+                  <div className="flex items-center text-sm font-medium text-emerald-600">
+                    <span>Generate</span>
+                    <ArrowRightIcon className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </button>
+              </div>
+            </div>
+
+            {/* Workplace Safety */}
+            <div>
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center">
+                  <HardHatIcon className="w-5 h-5 text-amber-600" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold text-gray-900">Workplace Safety</h3>
+                  <p className="text-sm text-gray-600">Australian WHS compliance documentation for construction and trades</p>
+                </div>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <button
+                  onClick={() => setSelectedType('swms')}
+                  className="group text-left p-8 bg-white border border-gray-200 rounded-2xl hover:border-amber-300 hover:shadow-lg transition-all duration-200"
+                >
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="w-12 h-12 bg-amber-50 rounded-xl flex items-center justify-center group-hover:bg-amber-600 transition-colors">
+                      <HardHatIcon className="w-6 h-6 text-amber-600 group-hover:text-white transition-colors" />
                     </div>
-                  </button>
-                );
-              })}
+                    <span className="text-xs font-medium text-amber-700 bg-amber-100 px-2 py-1 rounded-full">Australian WHS</span>
+                  </div>
+                  <h4 className="text-lg font-semibold text-gray-900 mb-2">Safe Work Method Statement</h4>
+                  <p className="text-sm text-gray-600 leading-relaxed mb-4">Generate SWMS documents for high-risk construction work. Covers all 19 categories of high-risk work as defined by WHS Regulations.</p>
+                  <div className="flex items-center text-sm font-medium text-amber-600">
+                    <span>Generate SWMS</span>
+                    <ArrowRightIcon className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </button>
+                <div className="p-8 bg-gray-50 border border-dashed border-gray-300 rounded-2xl flex flex-col items-center justify-center text-center">
+                  <div className="w-12 h-12 bg-gray-200 rounded-xl flex items-center justify-center mb-4">
+                    <PlusIcon className="w-6 h-6 text-gray-400" />
+                  </div>
+                  <h4 className="text-base font-semibold text-gray-500 mb-2">More Coming Soon</h4>
+                  <p className="text-sm text-gray-500">Additional safety documents including JSAs, toolbox talks, and safety checklists.</p>
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -290,7 +487,7 @@ export default function Home() {
                 <div className="text-sm text-gray-600">Signup Required</div>
               </div>
               <div>
-                <div className="text-3xl font-semibold text-gray-900 mb-1">6</div>
+                <div className="text-3xl font-semibold text-gray-900 mb-1">7</div>
                 <div className="text-sm text-gray-600">Document Types</div>
               </div>
               <div>
@@ -333,6 +530,10 @@ export default function Home() {
               <FAQItem
                 question="How often should I update my legal documents?"
                 answer="We recommend reviewing your legal documents at least annually, or whenever you make significant changes to your business practices, data collection methods, or when new regulations come into effect. Our generator makes it easy to create updated versions."
+              />
+              <FAQItem
+                question="What is a SWMS and when do I need one?"
+                answer="A Safe Work Method Statement (SWMS) is a legal requirement in Australia for any high-risk construction work as defined by the Work Health and Safety (WHS) Regulations. This includes work at heights, demolition, excavation, structural alterations, confined spaces, asbestos removal, and more. A SWMS must be prepared before high-risk work begins and workers must be trained in its contents. Our generator creates compliant SWMS documents tailored to your specific work activities."
               />
             </div>
           </div>
@@ -425,6 +626,7 @@ export default function Home() {
             {selectedType === 'eula' && <EulaForm onGenerate={handleGenerateEula} />}
             {selectedType === 'refund' && <RefundForm onGenerate={handleGenerateRefund} />}
             {selectedType === 'disclaimer' && <DisclaimerForm onGenerate={handleGenerateDisclaimer} />}
+            {selectedType === 'swms' && <SwmsForm onGenerate={handleGenerateSwms} />}
           </>
         ) : (
           <PolicyOutput policy={generatedPolicy} onReset={handleReset} />
@@ -504,6 +706,16 @@ function AlertIcon({ className }: { className?: string }) {
   );
 }
 
+function HardHatIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <path d="M2 18a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v2z" strokeLinecap="round" strokeLinejoin="round"/>
+      <path d="M10 15V6a2 2 0 0 1 2-2v0a2 2 0 0 1 2 2v9" strokeLinecap="round" strokeLinejoin="round"/>
+      <path d="M4 15v-3a8 8 0 0 1 16 0v3" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  );
+}
+
 function ArrowRightIcon({ className }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -549,6 +761,15 @@ function DownloadIcon({ className }: { className?: string }) {
       <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" strokeLinecap="round" strokeLinejoin="round"/>
       <polyline points="7,10 12,15 17,10" strokeLinecap="round" strokeLinejoin="round"/>
       <line x1="12" y1="15" x2="12" y2="3" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  );
+}
+
+function PlusIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <line x1="12" y1="5" x2="12" y2="19" strokeLinecap="round" strokeLinejoin="round"/>
+      <line x1="5" y1="12" x2="19" y2="12" strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
   );
 }
