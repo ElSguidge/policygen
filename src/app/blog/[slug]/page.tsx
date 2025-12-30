@@ -13,19 +13,24 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
 
   if (!post) {
     return {
-      title: 'Post Not Found | PolicyGen Blog',
+      title: 'Post Not Found | SafeDocGen Blog',
     };
   }
 
   return {
-    title: `${post.title} | PolicyGen Blog`,
+    title: post.title,
     description: post.description,
     keywords: post.tags,
     authors: [{ name: post.author }],
+    alternates: {
+      canonical: `/blog/${slug}`,
+    },
     openGraph: {
       title: post.title,
       description: post.description,
       type: 'article',
+      url: `https://safedocgen.app/blog/${slug}`,
+      siteName: 'SafeDocGen',
       publishedTime: post.publishedAt,
       modifiedTime: post.updatedAt,
       authors: [post.author],
@@ -64,18 +69,25 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     '@type': 'Article',
     headline: post.title,
     description: post.description,
+    image: `https://safedocgen.app/og-image.png`,
     author: {
       '@type': 'Organization',
       name: post.author,
+      url: 'https://safedocgen.app',
     },
     datePublished: post.publishedAt,
     dateModified: post.updatedAt,
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `https://safedocgen.app/blog/${slug}`,
+    },
     publisher: {
       '@type': 'Organization',
-      name: 'PolicyGen',
+      name: 'SafeDocGen',
+      url: 'https://safedocgen.app',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://policygen.com/logo.png',
+        url: 'https://safedocgen.app/logo.png',
       },
     },
   };
@@ -98,7 +110,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
-              <span className="text-xl font-semibold tracking-tight">PolicyGen</span>
+              <span className="text-xl font-semibold tracking-tight">SafeDocGen</span>
             </Link>
             <nav className="hidden md:flex items-center gap-8 text-sm text-gray-600">
               <Link href="/#documents" className="hover:text-gray-900 transition-colors">Documents</Link>
@@ -271,11 +283,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
                 </div>
-                <span className="text-lg font-semibold">PolicyGen</span>
+                <span className="text-lg font-semibold">SafeDocGen</span>
               </div>
               <p className="text-sm text-gray-500 text-center md:text-right">
                 Expert guides for legal document compliance.<br className="hidden md:block" />
-                Generate professional documents free at PolicyGen.
+                Generate professional documents free at SafeDocGen.
               </p>
             </div>
           </div>

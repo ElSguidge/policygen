@@ -3,18 +3,22 @@ import Link from 'next/link';
 import { blogPosts, getFeaturedPosts, getAllCategories } from '@/lib/blog-data';
 
 export const metadata: Metadata = {
-  title: 'Legal Document Blog | PolicyGen - Expert Guides & Compliance Tips',
+  title: 'Legal Document Blog - Expert Guides & Compliance Tips',
   description: 'In-depth articles on privacy policies, terms of service, SWMS, GDPR compliance, and more. Expert guidance for creating legally compliant business documents.',
   keywords: ['privacy policy guide', 'terms of service', 'GDPR compliance', 'CCPA', 'legal documents', 'SWMS', 'business compliance'],
+  alternates: {
+    canonical: '/blog',
+  },
   openGraph: {
-    title: 'Legal Document Blog | PolicyGen',
+    title: 'Legal Document Blog | SafeDocGen',
     description: 'Expert guides and articles on legal documents, privacy compliance, and business protection.',
     type: 'website',
-    url: 'https://policygen.com/blog',
+    url: 'https://safedocgen.app/blog',
+    siteName: 'SafeDocGen',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Legal Document Blog | PolicyGen',
+    title: 'Legal Document Blog | SafeDocGen',
     description: 'Expert guides and articles on legal documents, privacy compliance, and business protection.',
   },
 };
@@ -35,7 +39,7 @@ export default function BlogPage() {
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </div>
-            <span className="text-xl font-semibold tracking-tight">PolicyGen</span>
+            <span className="text-xl font-semibold tracking-tight">SafeDocGen</span>
           </Link>
           <nav className="hidden md:flex items-center gap-8 text-sm text-gray-600">
             <Link href="/#documents" className="hover:text-gray-900 transition-colors">Documents</Link>
@@ -238,11 +242,11 @@ export default function BlogPage() {
                   <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
-              <span className="text-lg font-semibold">PolicyGen</span>
+              <span className="text-lg font-semibold">SafeDocGen</span>
             </div>
             <p className="text-sm text-gray-500 text-center md:text-right">
               Expert guides for legal document compliance.<br className="hidden md:block" />
-              Generate professional documents free at PolicyGen.
+              Generate professional documents free at SafeDocGen.
             </p>
           </div>
         </div>
