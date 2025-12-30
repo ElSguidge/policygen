@@ -26,6 +26,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
+  verification: {
+    google: "xcw1AVbcXtvcVgBbkX1N41ojphCspx_BVa2axLVGy8I",
+  },
   openGraph: {
     title: "Free Legal Document Generator | SafeDocGen",
     description: "Create professional legal documents for your website in minutes. Privacy Policy, Terms of Service, EULA & more. 100% free.",
