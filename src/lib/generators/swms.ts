@@ -431,31 +431,31 @@ This SWMS is required under WHS Regulations for the following HRCW activities:
 
   swms += `## SECTION ${documentType === 'swms' && hrcwList.length > 0 ? '5' : '4'}: PERSONAL PROTECTIVE EQUIPMENT (PPE)
 
-| ITEM | REQUIRED | NOTES |
+| ITEM | REQUIRED | STANDARD |
 |---|---|---|
 `;
 
-  // Professional PPE table with icons
-  const ppeDetails: Record<string, { symbol: string; notes: string }> = {
-    'Hard Hat': { symbol: '⛑', notes: 'AS/NZS 1801 compliant' },
-    'Safety Glasses': { symbol: '◉', notes: 'AS/NZS 1337 compliant' },
-    'Hi-Vis Clothing': { symbol: '▣', notes: 'Class D or better, AS/NZS 4602' },
-    'Safety Boots': { symbol: '▨', notes: 'Steel toe, AS/NZS 2210' },
-    'Gloves': { symbol: '✋', notes: 'Task-appropriate' },
-    'Hearing Protection': { symbol: '♫', notes: 'AS/NZS 1270' },
-    'Respirator': { symbol: '◐', notes: 'Fit tested, AS/NZS 1716' },
-    'Fall Protection Harness': { symbol: '⚓', notes: 'AS/NZS 1891, inspected' },
-    'Face Shield': { symbol: '◫', notes: 'AS/NZS 1337' }
+  // Professional PPE table with free vector icons (using simple SVG shapes that work in markdown)
+  const ppeDetails: Record<string, { icon: string; notes: string }> = {
+    'Hard Hat': { icon: '![Hard Hat](https://img.shields.io/badge/Hard_Hat-MANDATORY-red?style=flat&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0id2hpdGUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTEyIDRjLTMgMC01IDItNSA1djZoMTBWOWMwLTMtMi01LTUtNXptNSA5SDdWOWMwLTIuNSAxLjUtNCA1LTRzNSAxLjUgNSA0djR6bS05IDJoMTJ2MUg4di0xeiIvPjwvc3ZnPg==)', notes: 'AS/NZS 1801' },
+    'Safety Glasses': { icon: '![Safety Glasses](https://img.shields.io/badge/Safety_Glasses-MANDATORY-red?style=flat&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0id2hpdGUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTIgMTJjMC0yIDItMyA0LTNoNGMyIDAgNCAxIDQgM3MtMiAzLTQgM2gtNGMtMiAwLTQtMS00LTN6bTE4IDBjMC0yLTItMy00LTNoLTRjLTIgMC00IDEtNCAzczIgMyA0IDNoNGMyIDAgNCAxIDQtM3oiLz48L3N2Zz4=)', notes: 'AS/NZS 1337' },
+    'Hi-Vis Clothing': { icon: '![Hi-Vis](https://img.shields.io/badge/Hi--Vis-MANDATORY-orange?style=flat&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0id2hpdGUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTEyIDJMNCA2djZjMCA1IDggMTAgOCAxMHM4LTUgOC0xMFY2bC04LTR6bTAgMmw2IDN2NWMwIDQtNiA4LTYgOFM2IDE2IDYgMTJWN2w2LTN6Ii8+PC9zdmc+)', notes: 'AS/NZS 4602 Class D+' },
+    'Safety Boots': { icon: '![Safety Boots](https://img.shields.io/badge/Safety_Boots-MANDATORY-red?style=flat&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0id2hpdGUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTUgMTBsMyA2aDh2LTZINXptMiAyaDZ2Mmgtdi0yeiIvPjwvc3ZnPg==)', notes: 'AS/NZS 2210 Steel Toe' },
+    'Gloves': { icon: '![Gloves](https://img.shields.io/badge/Gloves-MANDATORY-red?style=flat&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0id2hpdGUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTggNnYxMmg4VjZIOHptMiAyaDR2OGgtNFY4eiIvPjwvc3ZnPg==)', notes: 'Task Appropriate' },
+    'Hearing Protection': { icon: '![Hearing Protection](https://img.shields.io/badge/Hearing-MANDATORY-red?style=flat&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0id2hpdGUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTEyIDJDOCAyIDUgNSA1IDlWMTVjMCAyIDIgMyA0IDNoMnYtNkg5VjljMC0yIDEtMyAzLTNzMyAxIDMgM3YzaC0ydjZoMmMyIDAgNCAxIDQtM1Y5YzAtNC0zLTctNy03eiIvPjwvc3ZnPg==)', notes: 'AS/NZS 1270' },
+    'Respirator': { icon: '![Respirator](https://img.shields.io/badge/Respirator-MANDATORY-red?style=flat&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0id2hpdGUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iOCIgY3k9IjgiIHI9IjIiLz48Y2lyY2xlIGN4PSIxNiIgY3k9IjgiIHI9IjIiLz48cGF0aCBkPSJNMTIgMTBjLTMgMC01IDItNSA1djJoMTB2LTJjMC0zLTItNS01LTV6Ii8+PC9zdmc+)', notes: 'AS/NZS 1716 Fit Tested' },
+    'Fall Protection Harness': { icon: '![Fall Protection](https://img.shields.io/badge/Fall_Protection-MANDATORY-red?style=flat&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0id2hpdGUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMTIiIGN5PSI0IiByPSIyIi8+PHBhdGggZD0iTTggOGw0IDR2OGgydi04bDQtNEgxNnYzaC00VjhIOHoiLz48L3N2Zz4=)', notes: 'AS/NZS 1891 Inspected' },
+    'Face Shield': { icon: '![Face Shield](https://img.shields.io/badge/Face_Shield-MANDATORY-red?style=flat&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0id2hpdGUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTEyIDJMNCA0djhoOHYxMGg4VjRsLTgtMnptMCA0bDQgMXY5aC00di05eiIvPjwvc3ZnPg==)', notes: 'AS/NZS 1337' }
   };
 
   ppeList.forEach(ppe => {
-    const detail = ppeDetails[ppe] || { symbol: '✓', notes: 'As required' };
-    swms += `| ${detail.symbol} **${ppe}** | **MANDATORY** | ${detail.notes} |
+    const detail = ppeDetails[ppe] || { icon: '**[PPE]**', notes: 'As required' };
+    swms += `| ${detail.icon} | ✓ | ${detail.notes} |
 `;
   });
 
   if (ppeOther) {
-    swms += `| ◆ **${ppeOther}** | **MANDATORY** | As specified |
+    swms += `| **${ppeOther}** | ✓ | As specified |
 `;
   }
 
