@@ -15,11 +15,11 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://safedocgen.app"),
   title: {
-    default: "Free Legal Document Generator | Privacy Policy, Terms, EULA | SafeDocGen",
+    default: "Free Legal Document Generator | Privacy Policy, Terms, SWMS | SafeDocGen",
     template: "%s | SafeDocGen",
   },
-  description: "Generate free, professional legal documents for your website or app. Privacy Policy, Terms of Service, Cookie Policy, EULA, Refund Policy, Disclaimers. GDPR, CCPA, CalOPPA compliant. No signup required.",
-  keywords: ["privacy policy generator", "terms of service generator", "cookie policy generator", "EULA generator", "refund policy", "disclaimer generator", "GDPR compliant", "CCPA compliant", "CalOPPA", "free legal documents"],
+  description: "Generate free, professional legal documents for your website or app. Privacy Policy, Terms of Service, Cookie Policy, EULA, Refund Policy, Disclaimers, SWMS. GDPR, CCPA, CalOPPA compliant. Australian WHS compliant SWMS generator.",
+  keywords: ["privacy policy generator", "terms of service generator", "cookie policy generator", "EULA generator", "refund policy", "disclaimer generator", "SWMS generator", "safe work method statement", "SWMS template", "Australian SWMS", "WHS compliance", "high risk construction work", "GDPR compliant", "CCPA compliant", "CalOPPA", "free legal documents"],
   authors: [{ name: "SafeDocGen" }],
   creator: "SafeDocGen",
   publisher: "SafeDocGen",
@@ -30,8 +30,8 @@ export const metadata: Metadata = {
     google: "xcw1AVbcXtvcVgBbkX1N41ojphCspx_BVa2axLVGy8I",
   },
   openGraph: {
-    title: "Free Legal Document Generator | SafeDocGen",
-    description: "Create professional legal documents for your website in minutes. Privacy Policy, Terms of Service, EULA & more. 100% free.",
+    title: "Free Legal Document Generator | SWMS, Privacy Policy, Terms | SafeDocGen",
+    description: "Create professional legal documents and SWMS in minutes. Privacy Policy, Terms of Service, EULA, Safe Work Method Statements & more. 100% free.",
     url: "https://safedocgen.app",
     siteName: "SafeDocGen",
     locale: "en_US",
@@ -47,8 +47,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Free Legal Document Generator | SafeDocGen",
-    description: "Create professional legal documents for your website in minutes. Privacy Policy, Terms of Service, EULA & more. 100% free.",
+    title: "Free Legal Document Generator | SWMS, Privacy Policy, Terms | SafeDocGen",
+    description: "Create professional legal documents and SWMS in minutes. Privacy Policy, Terms of Service, EULA, Safe Work Method Statements & more. 100% free.",
     images: ["/og-image.png"],
   },
   robots: {
@@ -72,7 +72,7 @@ const organizationSchema = {
   url: "https://safedocgen.app",
   logo: "https://safedocgen.app/logo.png",
   description:
-    "Free legal document generator for websites and apps. Create Privacy Policies, Terms of Service, Cookie Policies, EULAs, and more.",
+    "Free legal document generator for websites and apps. Create Privacy Policies, Terms of Service, Cookie Policies, EULAs, Safe Work Method Statements (SWMS), and more.",
   sameAs: [],
   contactPoint: {
     "@type": "ContactPoint",
