@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { generatePlainText, generateHTML } from '@/lib/generate-policy';
-import jsPDF from 'jspdf';
 
 interface PolicyOutputProps {
   policy: string;
@@ -55,166 +54,6 @@ export function PolicyOutput({ policy, onReset }: PolicyOutputProps) {
     URL.revokeObjectURL(url);
   };
 
-  const downloadDirectPdf = () => {
-    const doc = new jsPDF({
-      orientation: 'portrait',
-      unit: 'mm',
-      format: 'a4',
-    });
-
-    // Configure PDF
-    const pageWidth = doc.internal.pageSize.getWidth();
-    const pageHeight = doc.internal.pageSize.getHeight();
-    const margin = 15;
-    const maxWidth = pageWidth - (margin * 2);
-    let yPosition = margin;
-
-    // Parse markdown to PDF
-    const lines = policy.split('\n');
-
-    for (let i = 0; i < lines.length; i++) {
-      const line = lines[i].trim();
-
-      // Check if we need a new page
-      if (yPosition > pageHeight - 20) {
-        doc.addPage();
-        yPosition = margin;
-      }
-
-      if (line.startsWith('# ')) {
-        doc.setFontSize(18);
-        doc.setFont('helvetica', 'bold');
-        const text = line.slice(2);
-        const splitText = doc.splitTextToSize(text, maxWidth);
-        doc.text(splitText, margin, yPosition);
-        yPosition += splitText.length * 8 + 8;
-      } else if (line.startsWith('## ')) {
-        doc.setFontSize(14);
-        doc.setFont('helvetica', 'bold');
-        const text = line.slice(3);
-        const splitText = doc.splitTextToSize(text, maxWidth);
-        doc.text(splitText, margin, yPosition);
-        yPosition += splitText.length * 6 + 6;
-      } else if (line.startsWith('### ')) {
-        doc.setFontSize(12);
-        doc.setFont('helvetica', 'bold');
-        const text = line.slice(4);
-        const splitText = doc.splitTextToSize(text, maxWidth);
-        doc.text(splitText, margin, yPosition);
-        yPosition += splitText.length * 5 + 4;
-      } else if (line.startsWith('- ') || line.match(/^\d+\. /)) {
-        doc.setFontSize(10);
-        doc.setFont('helvetica', 'normal');
-        const text = line.replace(/^- /, '• ').replace(/\*\*(.*?)\*\*/g, '$1');
-        const splitText = doc.splitTextToSize(text, maxWidth - 5);
-        doc.text(splitText, margin + 5, yPosition);
-        yPosition += splitText.length * 5 + 2;
-      } else if (line.trim() === '---') {
-        doc.setDrawColor(200);
-        doc.line(margin, yPosition, pageWidth - margin, yPosition);
-        yPosition += 6;
-      } else if (line.length > 0 && !line.includes('|')) {
-        doc.setFontSize(10);
-        doc.setFont('helvetica', 'normal');
-        const text = line.replace(/\*\*(.*?)\*\*/g, '$1').replace(/\*(.*?)\*/g, '$1');
-        const splitText = doc.splitTextToSize(text, maxWidth);
-        doc.text(splitText, margin, yPosition);
-        yPosition += splitText.length * 5 + 3;
-      }
-    }
-
-    // Save the PDF
-    const filename = isSwms ? 'swms-document.pdf' : 'document.pdf';
-    doc.save(filename);
-  };
-
-  const sharePdf = async () => {
-    // Create a blob version for sharing
-    const doc = new jsPDF({
-      orientation: 'portrait',
-      unit: 'mm',
-      format: 'a4',
-    });
-
-    const pageWidth = doc.internal.pageSize.getWidth();
-    const pageHeight = doc.internal.pageSize.getHeight();
-    const margin = 15;
-    const maxWidth = pageWidth - (margin * 2);
-    let yPosition = margin;
-
-    const lines = policy.split('\n');
-
-    for (let i = 0; i < lines.length; i++) {
-      const line = lines[i].trim();
-
-      if (yPosition > pageHeight - 20) {
-        doc.addPage();
-        yPosition = margin;
-      }
-
-      if (line.startsWith('# ')) {
-        doc.setFontSize(18);
-        doc.setFont('helvetica', 'bold');
-        const text = line.slice(2);
-        const splitText = doc.splitTextToSize(text, maxWidth);
-        doc.text(splitText, margin, yPosition);
-        yPosition += splitText.length * 8 + 8;
-      } else if (line.startsWith('## ')) {
-        doc.setFontSize(14);
-        doc.setFont('helvetica', 'bold');
-        const text = line.slice(3);
-        const splitText = doc.splitTextToSize(text, maxWidth);
-        doc.text(splitText, margin, yPosition);
-        yPosition += splitText.length * 6 + 6;
-      } else if (line.startsWith('### ')) {
-        doc.setFontSize(12);
-        doc.setFont('helvetica', 'bold');
-        const text = line.slice(4);
-        const splitText = doc.splitTextToSize(text, maxWidth);
-        doc.text(splitText, margin, yPosition);
-        yPosition += splitText.length * 5 + 4;
-      } else if (line.startsWith('- ') || line.match(/^\d+\. /)) {
-        doc.setFontSize(10);
-        doc.setFont('helvetica', 'normal');
-        const text = line.replace(/^- /, '• ').replace(/\*\*(.*?)\*\*/g, '$1');
-        const splitText = doc.splitTextToSize(text, maxWidth - 5);
-        doc.text(splitText, margin + 5, yPosition);
-        yPosition += splitText.length * 5 + 2;
-      } else if (line.trim() === '---') {
-        doc.setDrawColor(200);
-        doc.line(margin, yPosition, pageWidth - margin, yPosition);
-        yPosition += 6;
-      } else if (line.length > 0 && !line.includes('|')) {
-        doc.setFontSize(10);
-        doc.setFont('helvetica', 'normal');
-        const text = line.replace(/\*\*(.*?)\*\*/g, '$1').replace(/\*(.*?)\*/g, '$1');
-        const splitText = doc.splitTextToSize(text, maxWidth);
-        doc.text(splitText, margin, yPosition);
-        yPosition += splitText.length * 5 + 3;
-      }
-    }
-
-    const pdfBlob = doc.output('blob');
-    const filename = isSwms ? 'swms-document.pdf' : 'document.pdf';
-    const file = new File([pdfBlob], filename, { type: 'application/pdf' });
-
-    if (navigator.share && navigator.canShare({ files: [file] })) {
-      try {
-        await navigator.share({
-          files: [file],
-          title: isSwms ? 'SWMS Document' : 'Document',
-          text: 'Generated with SafeDocGen',
-        });
-      } catch (err) {
-        if ((err as Error).name !== 'AbortError') {
-          console.error('Share failed:', err);
-          alert('Share failed. Please use the download button instead.');
-        }
-      }
-    } else {
-      alert('Sharing is not supported on this device. Use the download button instead.');
-    }
-  };
 
   const downloadPdf = () => {
     // Open print-friendly version in new window - user can save as PDF
@@ -569,13 +408,9 @@ export function PolicyOutput({ policy, onReset }: PolicyOutputProps) {
 
           {/* Action buttons */}
           <div className="flex gap-2 flex-wrap">
-            <Button onClick={downloadDirectPdf} variant="default" className="flex-1 min-w-[140px]">
+            <Button onClick={downloadPdf} variant="default" className="flex-1 min-w-[140px]">
               <PdfIcon className="mr-2 h-4 w-4" />
-              Download PDF
-            </Button>
-            <Button onClick={sharePdf} variant="default" className="flex-1 min-w-[140px]">
-              <ShareIcon className="mr-2 h-4 w-4" />
-              Share PDF
+              Print / Save PDF
             </Button>
             <Button onClick={copyToClipboard} variant="outline" className="flex-1 min-w-[140px]">
               {copied ? (
@@ -677,15 +512,4 @@ function PdfIcon({ className }: { className?: string }) {
   );
 }
 
-function ShareIcon({ className }: { className?: string }) {
-  return (
-    <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-      <circle cx="18" cy="5" r="3" />
-      <circle cx="6" cy="12" r="3" />
-      <circle cx="18" cy="19" r="3" />
-      <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
-      <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
-    </svg>
-  );
-}
 
