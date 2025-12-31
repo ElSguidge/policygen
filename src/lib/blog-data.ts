@@ -20,7 +20,7 @@ export const blogPosts: BlogPost[] = [
     title: 'The Complete Guide to Privacy Policies in 2025: GDPR, CCPA & Beyond',
     description: 'Learn everything you need to know about privacy policies in 2025. Covers GDPR, CCPA, CPRA, VCDPA, and other major privacy regulations with practical compliance tips.',
     excerpt: 'Privacy regulations are evolving rapidly. This comprehensive guide breaks down exactly what your privacy policy needs to include to comply with GDPR, CCPA, and emerging state privacy laws.',
-    author: 'PolicyGen Legal Team',
+    author: 'SafeDocGen Legal Team',
     authorRole: 'Privacy Compliance Specialists',
     publishedAt: '2025-01-15',
     updatedAt: '2025-01-15',
@@ -175,7 +175,7 @@ Cookie banners and consent mechanisms must align with your privacy policy disclo
 
 A well-crafted privacy policy is your first line of defense against regulatory penalties and your foundation for building customer trust. In 2025's privacy-conscious environment, investing time in getting your privacy policy right isn't just legal compliance—it's good business.
 
-Use PolicyGen's free Privacy Policy Generator to create a comprehensive, regulation-compliant privacy policy tailored to your specific business needs.
+Use SafeDocGen's free Privacy Policy Generator to create a comprehensive, regulation-compliant privacy policy tailored to your specific business needs.
     `,
   },
   {
@@ -183,7 +183,7 @@ Use PolicyGen's free Privacy Policy Generator to create a comprehensive, regulat
     title: 'SWMS Explained: The Definitive Guide for Australian Construction',
     description: 'Complete guide to Safe Work Method Statements (SWMS) for Australian construction. Learn WHS requirements, HRCW activities, and how to create compliant SWMS documents.',
     excerpt: 'Safe Work Method Statements are mandatory for high-risk construction work in Australia. This guide covers everything from legal requirements to practical implementation.',
-    author: 'PolicyGen Safety Team',
+    author: 'SafeDocGen Safety Team',
     authorRole: 'WHS Compliance Specialists',
     publishedAt: '2025-01-10',
     updatedAt: '2025-01-10',
@@ -364,7 +364,7 @@ Failure to have a compliant SWMS for high-risk construction work can result in:
 
 A well-prepared SWMS is more than a compliance document—it's a practical tool for protecting workers' lives. By understanding the requirements and following best practices, you can create SWMS documents that genuinely contribute to safer workplaces.
 
-Use PolicyGen's free SWMS Generator to create professional, compliant Safe Work Method Statements for your high-risk construction work.
+Use SafeDocGen's free SWMS Generator to create professional, compliant Safe Work Method Statements for your high-risk construction work.
     `,
   },
   {
@@ -372,7 +372,7 @@ Use PolicyGen's free SWMS Generator to create professional, compliant Safe Work 
     title: 'Terms of Service: 15 Essential Clauses Every Business Needs',
     description: 'Discover the 15 must-have clauses for your Terms of Service agreement. Protect your business legally while building customer trust with clear, enforceable terms.',
     excerpt: 'Your Terms of Service is a legally binding contract between you and your users. Missing key clauses can leave your business exposed. Here are the 15 essentials.',
-    author: 'PolicyGen Legal Team',
+    author: 'SafeDocGen Legal Team',
     authorRole: 'Commercial Law Specialists',
     publishedAt: '2025-01-08',
     updatedAt: '2025-01-08',
@@ -636,7 +636,7 @@ These "boilerplate" clauses can be crucial in legal disputes.
 
 Well-crafted Terms of Service are essential protection for any online business. While templates can provide a starting point, every business has unique needs that should be reflected in their terms.
 
-Use PolicyGen's free Terms of Service Generator to create comprehensive, customized terms that protect your business while building trust with your users.
+Use SafeDocGen's free Terms of Service Generator to create comprehensive, customized terms that protect your business while building trust with your users.
     `,
   },
   {
@@ -644,7 +644,7 @@ Use PolicyGen's free Terms of Service Generator to create comprehensive, customi
     title: 'Cookie Policy Compliance: GDPR, PECR & ePrivacy Explained',
     description: 'Navigate cookie consent requirements under GDPR, PECR, and ePrivacy regulations. Learn about cookie types, consent mechanisms, and compliance best practices.',
     excerpt: 'Cookie consent has become a complex compliance challenge. This guide explains what cookies require consent, how to implement compliant cookie banners, and common mistakes to avoid.',
-    author: 'PolicyGen Privacy Team',
+    author: 'SafeDocGen Privacy Team',
     authorRole: 'Data Protection Specialists',
     publishedAt: '2025-01-05',
     updatedAt: '2025-01-05',
@@ -871,7 +871,7 @@ Users must be able to change their preferences easily.
 
 Cookie compliance is an ongoing process, not a one-time task. Regulations continue to evolve, and your cookie practices may change as your website grows. Regular audits and updates are essential.
 
-Use PolicyGen's free Cookie Policy Generator to create a comprehensive, regulation-compliant cookie policy for your website.
+Use SafeDocGen's free Cookie Policy Generator to create a comprehensive, regulation-compliant cookie policy for your website.
     `,
   },
   {
@@ -879,7 +879,7 @@ Use PolicyGen's free Cookie Policy Generator to create a comprehensive, regulati
     title: 'EULA Essentials: Software Licensing for Developers & Businesses',
     description: 'Understanding End-User License Agreements for software. Learn about licensing models, key clauses, intellectual property protection, and EULA enforcement.',
     excerpt: 'An End-User License Agreement defines how users can use your software. Get the clauses right to protect your intellectual property while avoiding user disputes.',
-    author: 'PolicyGen Legal Team',
+    author: 'SafeDocGen Legal Team',
     authorRole: 'Software Licensing Specialists',
     publishedAt: '2025-01-02',
     updatedAt: '2025-01-02',
@@ -1131,7 +1131,7 @@ If applicable:
 
 A well-drafted EULA protects your software investment while setting clear expectations with users. The specific clauses you need depend on your software type, business model, and risk tolerance.
 
-Use PolicyGen's free EULA Generator to create a comprehensive End-User License Agreement tailored to your software.
+Use SafeDocGen's free EULA Generator to create a comprehensive End-User License Agreement tailored to your software.
     `,
   },
   {
@@ -1139,7 +1139,7 @@ Use PolicyGen's free EULA Generator to create a comprehensive End-User License A
     title: 'Refund Policies That Convert: Balancing Protection & Trust',
     description: 'Create refund and return policies that protect your business while building customer confidence. Covers legal requirements, best practices, and conversion optimization.',
     excerpt: 'Your refund policy directly impacts conversion rates. Learn how to craft policies that protect your business while giving customers the confidence to buy.',
-    author: 'PolicyGen E-Commerce Team',
+    author: 'SafeDocGen E-Commerce Team',
     authorRole: 'E-Commerce Specialists',
     publishedAt: '2024-12-28',
     updatedAt: '2024-12-28',
@@ -1339,7 +1339,7 @@ Address who pays:
 
 Your refund policy is a critical business tool that impacts customer trust, conversion rates, and your bottom line. The right policy balances protection for your business with confidence for your customers.
 
-Use PolicyGen's free Refund Policy Generator to create a professional policy tailored to your business model.
+Use SafeDocGen's free Refund Policy Generator to create a professional policy tailored to your business model.
     `,
   },
   {
@@ -1347,7 +1347,7 @@ Use PolicyGen's free Refund Policy Generator to create a professional policy tai
     title: 'Website Disclaimers: Protecting Your Business from Liability',
     description: 'Comprehensive guide to website disclaimers. Learn which disclaimers your site needs, from affiliate disclosures to medical disclaimers, and how to implement them.',
     excerpt: 'Different websites need different disclaimers. Learn which ones apply to your content and how to properly protect your business from potential liability claims.',
-    author: 'PolicyGen Legal Team',
+    author: 'SafeDocGen Legal Team',
     authorRole: 'Liability Specialists',
     publishedAt: '2024-12-20',
     updatedAt: '2024-12-20',
@@ -1564,7 +1564,7 @@ Disclaimers cannot protect against:
 
 The right disclaimers depend on your specific content and activities. While disclaimers provide important protection, they work best as part of a comprehensive approach that includes accurate content, clear policies, and responsible business practices.
 
-Use PolicyGen's free Disclaimer Generator to create customized disclaimers for your website.
+Use SafeDocGen's free Disclaimer Generator to create customized disclaimers for your website.
     `,
   },
   {
@@ -1572,7 +1572,7 @@ Use PolicyGen's free Disclaimer Generator to create customized disclaimers for y
     title: 'GDPR Compliance Checklist: 25 Steps for 2025',
     description: 'Comprehensive GDPR compliance checklist for 2025. Step-by-step guide to data protection compliance including documentation, processes, and technical requirements.',
     excerpt: 'GDPR enforcement continues to intensify with record fines. Use this 25-step checklist to ensure your organization is compliant and protected.',
-    author: 'PolicyGen Privacy Team',
+    author: 'SafeDocGen Privacy Team',
     authorRole: 'GDPR Compliance Specialists',
     publishedAt: '2024-12-15',
     updatedAt: '2025-01-01',
@@ -1872,7 +1872,7 @@ Keep records of:
 
 GDPR compliance requires ongoing effort, not a one-time project. Use this checklist to assess your current state and identify gaps. Regular reviews ensure you stay compliant as regulations evolve and your business changes.
 
-Use PolicyGen's free Privacy Policy Generator to create a GDPR-compliant privacy policy as part of your compliance program.
+Use SafeDocGen's free Privacy Policy Generator to create a GDPR-compliant privacy policy as part of your compliance program.
     `,
   },
 ];

@@ -643,7 +643,7 @@ By signing below, I confirm that:
 
 ---
 
-*This ${docTitle} was generated using PolicyGen. Review and customise for your specific workplace and activities. Consult a WHS professional for complex or high-risk work.*
+*This ${docTitle} was generated using SafeDocGen. Review and customise for your specific workplace and activities. Consult a WHS professional for complex or high-risk work.*
 `;
 
   return swms;
