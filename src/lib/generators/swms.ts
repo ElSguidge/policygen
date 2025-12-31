@@ -431,17 +431,35 @@ This SWMS is required under WHS Regulations for the following HRCW activities:
 
   swms += `## SECTION ${documentType === 'swms' && hrcwList.length > 0 ? '5' : '4'}: PERSONAL PROTECTIVE EQUIPMENT (PPE)
 
-| PPE REQUIRED FOR THIS TASK |
-|---|
+| ITEM | REQUIRED | NOTES |
+|---|---|---|
 `;
 
-  // Create PPE table with checkmarks
-  swms += `| `;
-  ppeList.forEach(ppe => {
-    swms += `[X] ${ppe}  `;
-  });
-  swms += `|
+  // Professional PPE table with icons
+  const ppeDetails: Record<string, { symbol: string; notes: string }> = {
+    'Hard Hat': { symbol: '⛑', notes: 'AS/NZS 1801 compliant' },
+    'Safety Glasses': { symbol: '◉', notes: 'AS/NZS 1337 compliant' },
+    'Hi-Vis Clothing': { symbol: '▣', notes: 'Class D or better, AS/NZS 4602' },
+    'Safety Boots': { symbol: '▨', notes: 'Steel toe, AS/NZS 2210' },
+    'Gloves': { symbol: '✋', notes: 'Task-appropriate' },
+    'Hearing Protection': { symbol: '♫', notes: 'AS/NZS 1270' },
+    'Respirator': { symbol: '◐', notes: 'Fit tested, AS/NZS 1716' },
+    'Fall Protection Harness': { symbol: '⚓', notes: 'AS/NZS 1891, inspected' },
+    'Face Shield': { symbol: '◫', notes: 'AS/NZS 1337' }
+  };
 
+  ppeList.forEach(ppe => {
+    const detail = ppeDetails[ppe] || { symbol: '✓', notes: 'As required' };
+    swms += `| ${detail.symbol} **${ppe}** | **MANDATORY** | ${detail.notes} |
+`;
+  });
+
+  if (ppeOther) {
+    swms += `| ◆ **${ppeOther}** | **MANDATORY** | As specified |
+`;
+  }
+
+  swms += `
 ---
 
 ## SECTION ${documentType === 'swms' && hrcwList.length > 0 ? '6' : '5'}: LICENCES, TRAINING & INDUCTIONS
